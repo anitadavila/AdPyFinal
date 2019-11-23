@@ -1,0 +1,60 @@
+import numpy as np
+from numpy import pi
+import matplotlib.pyplot as plt
+import matplotlib.animation as animation
+
+image = plt.figure()
+image.set_dpi(100)
+ax_1 = image.add_subplot(1,1,1)
+
+#diffusion variable-fixed
+k = 2
+
+#scaling variable
+scl = 5
+
+#Length of the rod (0,l) on the x axis
+l = pi
+
+#Initial contitions u(0,t) = u(l,t) = 0. Temperature at x=0 and x=l is fixed
+xnot = np.linspace(0,l+1,10000)
+tnot = 0
+tempnot = 5  #Temperature of the rod before heating
+
+#Increment
+dt = 0.01
+
+#Heat fcn
+def u(x,t):
+return tempnot + scl*np.exp(-k*t)*np.sin(x)
+
+#Gradient of u
+def gradu(x,t):
+#du/dx              #du/dt
+return scl*np.array([np.exp(-k*t)*np.cos(x),-k*np.exp(-k*t)*np.sin(x)])
+
+a = []
+t = []
+
+for i in range(500):
+    val = u(xnot,tnot) + gradu(xnot,tnot)[1]*dt
+    t.append(tnot)
+    tnot = tnot + dt
+    a.append(val)
+
+k = 0
+def animate(i):         #The plot shows the temperature evolving with time
+global k            #at each point x in the rod
+    x = a[k]            #The ends of the rod are kept at temperature temp0
+    k += 1              #The rod is heated in one spot, then it cools down
+    ax_1.clear()
+    plt.plot(xnot,x,color='blue',label='Temp at a given x')
+    plt.plot(0,0,color='blue',label='Elapsed time '+str(round(t[k],2)))
+    plt.grid(True)
+    plt.ylim([tempnot-2,2.5*scl])
+    plt.xlim([0,l])
+    plt.title('Heat Equation')
+    plt.legend()
+
+animat = animation.FuncAnimation(image,animate,frames=360,interval=20)
+plt.show()
