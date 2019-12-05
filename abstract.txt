@@ -1,11 +1,10 @@
 Project members:
 Anita Davila 
-Michael Merluzzi
 Ryanne Parker
 
 Project Idea:
 Our project combines an interesting topic in mathematics and displays it's possibilies onto a program.
-Our group will be working on Fourier Series and show how it is possible to make any drawing just bu
+Our group will be working on Fourier Series and show how it is possible to make any drawing just by
 using sines and cosines. We will display (to the user) four different drawings. When the user has
 picked a drawing, we will display the animation that goes into creating that drawing using the fourier
 series. As the user is seeing the drawing they picked out being drawn using the fourier series, we 
@@ -18,5 +17,5 @@ Our group consists of members studying applied mathematics and/or pure mathemati
 a better understanding of the fourier series, as well as, further possibilites we may achieve by 
 studying this topic. This is one step into gaining insight of this beautiful topic and we would
 like to share this with others for they may have not seen what mathematics can do. We hope that 
-people will be inspired by the what the fourier series can accomplish in terms of engineerins, art,
+people will be inspired by the what the fourier series can accomplish in terms of engineering, art,
 and mathematics.

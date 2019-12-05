@@ -1,0 +1,108 @@
+WHAT IS THE HEAT EQUATION?
+We are looking to imitate the appearance of heat flowing through a rod with a given length over a period of time. 
+We do so by developing a few assumptions. Consider a rod of cylindrical shape, with two ends that are kept at a 
+constant temperature. The rod is then heated for a certain amount of time in one spot, then begins to cool. 
+We understand that the temperature of the rod can be represented by a function of just two variables. This is possible 
+through making the assumption that each section of the rod (that are extremely small in width (dx)) share a consistent 
+temperature. Through using techniques & methods similar to separating variables and implementing initial conditions
+we will find a unique solution for f(x)=sin(x) and L = pi. The function is then computed given our two variables. 
+Using partial derivatives results in a condensed version of our function. 
+
+This program will give a visual representation of the temperature at any x, over an interval of time. 
+
+DISSECTING CODE/COMMENTS
+
+import numpy as np # this external library allows us to perform math operations on arrays/larger datasets/ or matrices # contains random number generators along with multiple functions 
+from numpy import pi # allows us to use functions present in numpy 
+import matplotlib.pyplot as plt # pyplot is the plotting framework in matplotlib
+import matplotlib.animation as animation # specific to the illusion of movement, in which will be used for our graph shown in sequence 
+
+
+fig = plt.figure() # creates a figure object; used when we want to tweak the size of the figure and add multiple axes object in the single figure
+fig.set_dpi(100) # allows us to call functions and install the image 
+ax1 = fig.add_subplot(1,1,1) # grid parameters; ie: "111" gives us a 1x1 grid, first subplot
+
+#Diffusion constant
+k = 2 
+
+#Scaling factor (for visualisation purposes)
+scale = 5
+
+#Length of the rod (0,L) on the x axis
+L = pi
+
+#Initial contitions u(0,t) = u(L,t) = 0. Temperature at x=0 and x=L is fixed
+x0 = np.linspace(0,L+1,10000)
+t0 = 0
+temp0 = 5  #Temperature of the rod at rest (before heating)
+
+#Increment
+dt = 0.01
+
+#Heat function
+
+def u(x,t):
+
+    return temp0 + scale*np.exp(-k*t)*np.sin(x)
+
+
+
+#Gradient of u
+
+def grad_u(x,t):
+
+                               #du/dx              #du/dt
+
+    return scale*np.array([np.exp(-k*t)*np.cos(x),-k*np.exp(-k*t)*np.sin(x)])
+
+
+
+a = []
+
+t = []
+
+
+
+for i in range(500): # returns sequence of integers between the beggining and end 
+
+    value = u(x0,t0) + grad_u(x0,t0)[1]*dt
+
+    t.append(t0) # similar to extend() in that an object is added at the end of our list t 
+
+    t0 = t0 + dt
+
+    a.append(value) 
+
+
+
+k = 0
+
+def animate(i):     #  creates an animation over the index i above 
+
+    global k     # here we declare a variable outside the function      
+
+    x = a[k]            
+
+    k += 1              
+
+    ax1.clear() # removes items from 1x1 grid, first subplot
+
+    plt.plot(x0,x,color='red',label='Temperature at each x') # basic plotting
+
+    plt.plot(0,0,color='red',label='Elapsed time '+str(round(t[k],2))) 
+
+    plt.grid(True)
+
+    plt.ylim([temp0-2,2.5*scale]) # sets range
+
+    plt.xlim([0,L]) # sets domain
+
+    plt.title('Heat equation')
+
+    plt.legend()
+
+    
+
+anim = animation.FuncAnimation(fig,animate,frames=360,interval=20) # begins animation
+
+plt.show() # displays current figure 
