@@ -1,4 +1,4 @@
-WHAT IS THE HEAT EQUATION?
+Question posed: WHAT IS THE HEAT EQUATION?
 We are looking to imitate the appearance of heat flowing through a rod with a given length over a period of time. 
 We do so by developing a few assumptions. Consider a rod of cylindrical shape, with two ends that are kept at a 
 constant temperature. The rod is then heated for a certain amount of time in one spot, then begins to cool. 
@@ -10,4 +10,7 @@ Using partial derivatives results in a condensed version of our function.
 
 To start, our program will give a visual representation of a simple wave that, over time, we can learn to code these variables necessary. 
 
-
+Our group consists of members studying applied mathematics. We achieve to gain a better understanding of partial derivatives and the heat 
+equation, as well as, further possibilites we may achieve by studying these topics. This is one step into gaining insight of these topics
+and we would like to share this with others for they may have not seen what mathematics can do. We hope that people will be inspired by 
+what the heat equation can accomplish in terms of engineering, art, and mathematics.
